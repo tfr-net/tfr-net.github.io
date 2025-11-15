@@ -41,19 +41,19 @@ style = "github-dark"
 # Social links
 [[params.social]]
   name = "Github"
-  icon = "fa-brands fa-github fa-2x fa-beat"
+  icon = "fa-brands fa-github fa-2x fa-fade"
   weight = 1
-  url = "https://github.com/johndoe/"
+  url = "https://github.com/tfr-net/"
 [[params.social]]
-  name = "Gitlab"
-  icon = "fa-brands fa-gitlab fa-2x"
+  name = "LinkedIn"
+  icon = "fa-brands fa-linkedin fa-2x fa-fade"
   weight = 2
-  url = "https://gitlab.com/johndoe/"
+  url = "https://www.linkedin.com/in/cameron-paton-610a5324a/"
 [[params.social]]
-  name = "Twitter"
-  icon = "fa-brands fa-x-twitter fa-2x"
+  name = "Steam"
+  icon = "fa-brands fa-steam fa-2x fa-fade"
   weight = 3
-  url = "https://twitter.com/johndoe/"
+  url = "https://steamcommunity.com/id/tfr-net"
 
 # Menu links
 [[menu.main]]
