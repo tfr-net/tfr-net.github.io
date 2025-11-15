@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>johndoe</title><link>https://cjp-afk.github.io/</link><description>Recent content on johndoe</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sat, 15 Nov 2025 04:33:55 +0800</lastBuildDate><atom:link href="https://cjp-afk.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Cap (Easy) Writeup</title><link>https://cjp-afk.github.io/posts/cap-htb/</link><pubDate>Sat, 15 Nov 2025 04:33:55 +0800</pubDate><guid>https://cjp-afk.github.io/posts/cap-htb/</guid><description>&lt;h1 id="introduction"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>TFR's Blog</title><link>https://tfr-net.github.io/</link><description>Recent content on TFR's Blog</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sat, 15 Nov 2025 04:33:55 +0800</lastBuildDate><atom:link href="https://tfr-net.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Cap (Easy) Writeup</title><link>https://tfr-net.github.io/posts/cap-htb/</link><pubDate>Sat, 15 Nov 2025 04:33:55 +0800</pubDate><guid>https://tfr-net.github.io/posts/cap-htb/</guid><description>&lt;h1 id="introduction"&gt;
  Introduction
  &lt;a class="heading-link" href="#introduction"&gt;
  &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
@@ -23,7 +23,7 @@
  &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
  &lt;/a&gt;
 &lt;/h2&gt;
-&lt;p&gt;To start with, we&amp;rsquo;ll do our basic &lt;strong&gt;nmap&lt;/strong&gt; scans of the machine. For something this simple, we don&amp;rsquo;t need to overcomplicate it.&lt;/p&gt;</description></item><item><title>root@kali:~$ whoami</title><link>https://cjp-afk.github.io/about/whoami/</link><pubDate>Sat, 15 Nov 2025 04:33:55 +0800</pubDate><guid>https://cjp-afk.github.io/about/whoami/</guid><description>&lt;h1 id="about"&gt;
+&lt;p&gt;To start with, we&amp;rsquo;ll do our basic &lt;strong&gt;nmap&lt;/strong&gt; scans of the machine. For something this simple, we don&amp;rsquo;t need to overcomplicate it.&lt;/p&gt;</description></item><item><title>root@kali:~$ whoami</title><link>https://tfr-net.github.io/about/whoami/</link><pubDate>Sat, 15 Nov 2025 04:33:55 +0800</pubDate><guid>https://tfr-net.github.io/about/whoami/</guid><description>&lt;h1 id="about"&gt;
  About
  &lt;a class="heading-link" href="#about"&gt;
  &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
