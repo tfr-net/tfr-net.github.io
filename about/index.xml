@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Abouts on johndoe</title><link>http://www.example.com/about/</link><description>Recent content in Abouts on johndoe</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sat, 15 Nov 2025 04:33:55 +0800</lastBuildDate><atom:link href="http://www.example.com/about/index.xml" rel="self" type="application/rss+xml"/><item><title>root@kali:~$ whoami</title><link>http://www.example.com/about/whoami/</link><pubDate>Sat, 15 Nov 2025 04:33:55 +0800</pubDate><guid>http://www.example.com/about/whoami/</guid><description>&lt;h1 id="about"&gt;
+ About
+ &lt;a class="heading-link" href="#about"&gt;
+ &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
+ &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
+ &lt;/a&gt;
+&lt;/h1&gt;</description></item></channel></rss>

