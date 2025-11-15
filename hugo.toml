@@ -1,5 +1,5 @@
-baseurl = "https://cjp-afk.github.io/"
-title = "johndoe"
+baseurl = "https://tfr-net.github.io/"
+title = "TFR's Blog"
 theme = "hugo-coder"
 languagecode = "en"
 defaultcontentlanguage = "en"
@@ -12,18 +12,16 @@ pagerSize = 20
 style = "github-dark"
 
 [params]
-  author = "John Doe"
-  info = "Full Stack DevOps and Magician"
-  description = "John Doe's personal website"
-  keywords = "blog,developer,personal"
-  avatarurl = "images/avatar.jpg"
+  author = "TFR"
+  info = "Cybersecurity enthusiast and developer."
+  description = "TFR's personal website"
+  keywords = "blog,developer,personal,cybersecurity,devops"
+  avatarurl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F4f%2F0d%2Fd4%2F4f0dd4078675312a6ede8e5377f3b3b3.jpg&f=1&nofb=1&ipt=e2538032e146cf123b5e5b7b100e5ae2b66956dcf8e621fc7390416eb954c2ed"
   #gravatar = "john.doe@example.com"
 
-  faviconSVG = "/img/favicon.svg"
-  favicon_32 = "/img/favicon-32x32.png"
-  favicon_16 = "/img/favicon-16x16.png"
+  faviconSVG = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ficon-library.com%2Fimages%2Fpenguin-icon%2Fpenguin-icon-19.jpg&f=1&nofb=1&ipt=25c01afccb1e5294ccff8c2e16c7568f95da4bf882b474e008d7ae7ef66219ac"
 
-  since = 2019
+  since = 2025
 
   enableTwemoji = true
 
@@ -43,7 +41,7 @@ style = "github-dark"
 # Social links
 [[params.social]]
   name = "Github"
-  icon = "fa-brands fa-github fa-2x"
+  icon = "fa-brands fa-github fa-2x fa-beat"
   weight = 1
   url = "https://github.com/johndoe/"
 [[params.social]]
