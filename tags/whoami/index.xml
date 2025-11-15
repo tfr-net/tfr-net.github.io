@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Whoami on TFR's Blog</title><link>https://tfr-net.github.io/tags/whoami/</link><description>Recent content in Whoami on TFR's Blog</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sat, 15 Nov 2025 04:33:55 +0800</lastBuildDate><atom:link href="https://tfr-net.github.io/tags/whoami/index.xml" rel="self" type="application/rss+xml"/><item><title>root@kali:~$ whoami</title><link>https://tfr-net.github.io/about/whoami/</link><pubDate>Sat, 15 Nov 2025 04:33:55 +0800</pubDate><guid>https://tfr-net.github.io/about/whoami/</guid><description>&lt;h1 id="about"&gt;
- About
- &lt;a class="heading-link" href="#about"&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Whoami on TFR's Blog</title><link>https://tfr-net.github.io/tags/whoami/</link><description>Recent content in Whoami on TFR's Blog</description><generator>Hugo</generator><language>en</language><lastBuildDate>Sat, 15 Nov 2025 04:33:55 +0800</lastBuildDate><atom:link href="https://tfr-net.github.io/tags/whoami/index.xml" rel="self" type="application/rss+xml"/><item><title>root@kali:~$ whoami</title><link>https://tfr-net.github.io/whoami/</link><pubDate>Sat, 15 Nov 2025 04:33:55 +0800</pubDate><guid>https://tfr-net.github.io/whoami/</guid><description>&lt;h1 id="-tfr--cybersecurity-penguin"&gt;
+ 🐧 tfr — Cybersecurity Penguin
+ &lt;a class="heading-link" href="#-tfr--cybersecurity-penguin"&gt;
  &lt;i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"&gt;&lt;/i&gt;
  &lt;span class="sr-only"&gt;Link to heading&lt;/span&gt;
  &lt;/a&gt;
-&lt;/h1&gt;</description></item></channel></rss>
+&lt;/h1&gt;
+&lt;p&gt;Hey! I’m &lt;strong&gt;Cameron&lt;/strong&gt;, but I go by &lt;strong&gt;tfr&lt;/strong&gt; online.&lt;br&gt;
+I break things, fix things, reverse things, and occasionally ask penguins about if I&amp;rsquo;m ready for the OSCP+. &lt;sup id="fnref:1"&gt;&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref"&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+&lt;p&gt;This blog is mostly just for me to write about my current focuses, projects, machines I&amp;rsquo;m working or anything really. I&amp;rsquo;ve been gifted with a brain of many interests but cursed to a life with little time so I tend to work on a few things at once.
+My hope is that this blog will help me stay committed and finish things I start, rather than just learning what I need and leaving it behind.&lt;/p&gt;</description></item></channel></rss>
