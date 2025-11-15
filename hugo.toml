@@ -13,7 +13,7 @@ style = "github-dark"
 
 [params]
   author = "TFR"
-  info = "Cybersecurity enthusiast and developer."
+  info = "Cybersecurity enthusiast and developer"
   description = "TFR's personal website"
   keywords = "blog,developer,personal,cybersecurity,devops"
   avatarurl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fi.pinimg.com%2F736x%2F4f%2F0d%2Fd4%2F4f0dd4078675312a6ede8e5377f3b3b3.jpg&f=1&nofb=1&ipt=e2538032e146cf123b5e5b7b100e5ae2b66956dcf8e621fc7390416eb954c2ed"
@@ -59,7 +59,7 @@ style = "github-dark"
 [[menu.main]]
   name = "About"
   weight = 1
-  url = "about/"
+  url = "whoami"
 [[menu.main]]
   name = "Blog"
   weight = 2
